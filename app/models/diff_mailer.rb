@@ -11,7 +11,7 @@ class DiffMailer < ActionMailer::Base
 
     project_name = changeset.repository.project.name
     author = changeset.author.to_s
-    subject "Commit to #{project_name} by #{author}: #{changeset.short_comments}"
+    subject "[#{project_name}] Commit by #{author}: #{changeset.short_comments}"
     #content_type 'multipart/alternative'
 
     part :content_type => "text/html",
