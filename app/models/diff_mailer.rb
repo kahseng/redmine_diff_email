@@ -1,15 +1,28 @@
 class DiffMailer < ActionMailer::Base
   def diff_notification(diff, changeset)
-    recipients changeset.repository.project.users.select{|u|u.mail}.map{|u|u.mail }
-    from 'redmine@lamar.com'
-    subject "Redmine code review: #{changeset.repository.project.name} rev #{changeset.revision}"    
+
+    # Only send to developers
+    recipients changeset.repository.project.users.select{|u|
+      u.mail &&
+      u.roles_for_project(changeset.repository.project).map(&:name).include?("Developer")
+    }.map{ |u|
+      u.mail
+    }
+
+    project_name = changeset.repository.project.name
+    author = changeset.author.to_s
+    subject "Commit to #{project_name} by #{author}: #{changeset.short_comments}"
     #content_type 'multipart/alternative'
 
-    part :content_type => "text/html", 
-      :body => render_message("diff_notification.text.html.rhtml", :diff => diff, :changeset => changeset)
-    
-    attachment 'text/x-patch' do |a|
-      a.filename = "changeset_r#{changeset.revision}.diff"
+    part :content_type => "text/html",
+      :body => render_message("diff_notification.text.html.rhtml",
+                :project_name => project_name,
+                :author => author,
+                :diff => diff,
+                :changeset => changeset)
+
+    attachment 'text/plain' do |a|
+      a.filename = "changeset_rev_#{changeset.revision}.diff"
       a.body = diff.join
     end
   end

@@ -213,8 +213,13 @@ ol.CodeRay li { white-space: pre }
 </head>
 <body>
 <div>
-	<%= h(@changeset.author.to_s) %> has commited revision <%= @changeset.revision %> for the <%= @changeset.repository.project.name %> project.<br />
-	Please take a moment to review their checkin.
+        <b>Project:</b> <a href="<%= Setting.host_name %>/projects/<%= @project_name %>/"><%= @project_name %></a> <br />
+        <b>Revision:</b> <a href="<%= Setting.host_name %>/projects/<%= @project_name %>/repository/revisions/<%= @changeset.revision %>/diff"><%= @changeset.revision %></a> <br />
+        <b>Author:</b> <%= h(@author) %> <br />
+        <b>Summary:</b> <%= @changeset.short_comments %> <br />
+        <b>Details:</b> <%= @changeset.long_comments %> <br /><br />
+
+        Please take a moment to review this checkin.<br /><br />
 </div>
 <%= render :partial => 'common/diff', :locals => {:diff => @diff, :diff_type => 'inline'} %>
 <hr />
