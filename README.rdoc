@@ -1,0 +1,42 @@
+= Redmine Diff Email Plugin
+
+This plugin sends diff emails for each changeset pushed to a repository.
+
+== Description
+
+This project is a fork of {genbit/redmine_diff_email}[https://github.com/genbit/redmine_diff_email]
+by {Sergey Generalov}[https://github.com/genbit] (originally by {Lamar}[https://github.com/Lamar/])
+with modifications made to have a better email format.
+
+== Installation
+
+1. Installing the plugin
+   1. Follow the plugin installation procedure at http://www.redmine.org/wiki/redmine/Plugins.
+      1. For convenience, the latest steps for Redmine 1.0.3 are to go to <tt>$REDMINE_DIR/vendor/plugins</tt>
+      2. <tt>git clone git://github.com/kahseng/redmine_diff_email.git</tt>
+   2. Restart your Redmine.
+
+== License
+
+Copyright (c) 2010 Kah Seng Tay
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
