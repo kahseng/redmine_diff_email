@@ -12,7 +12,9 @@ module ChangesetPath
     def send_diff_emails
       logger.info "Sends called+++++++++++++++++++++++++++++++++++" if logger && logger.debug?
 #      if repository.project.custom_value_for(CustomField.find_by_name("Send Diff Emails"))
-      DiffMailer.deliver_diff_notification(repository.diff("", previous.revision, revision), self)
+      if previous
+        DiffMailer.deliver_diff_notification(repository.diff("", previous.revision, revision), self)
+       end
 #      end
     end
   end
