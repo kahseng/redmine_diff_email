@@ -1,29 +1,39 @@
 class DiffMailer < ActionMailer::Base
-  def diff_notification(diff, changeset)
 
-    # Only send to developers
+  def self.default_url_options
+    h = Setting.host_name
+    h = h.to_s.gsub(%r{\/.*$}, '') unless Redmine::Utils.relative_url_root.blank?
+    { :host => h, :protocol => Setting.protocol }
+  end
+
+  def diff_notification(changeset)
+    diff = changeset.repository.diff("", changeset.revision, nil)
+
+    # Only send to users, who want to receive this emails
     recipients changeset.repository.project.users.select{|u|
-      u.mail &&
-      u.roles_for_project(changeset.repository.project).map(&:name).include?("Developer")
+      custom_value = u.custom_field_values.select { |value| value.custom_field.name == 'Send diff email' }.first
+      u.mail && custom_value && custom_value.value == '1'
     }.map{ |u|
       u.mail
     }
 
-    project_name = changeset.repository.project.name
+    project = changeset.repository.project
     author = changeset.author.to_s
-    subject "[#{project_name}] Commit by #{author}: #{changeset.short_comments}"
-    #content_type 'multipart/alternative'
+    subject "[#{project.name}] Commit by #{author}: #{changeset.short_comments}"
 
     part :content_type => "text/html",
       :body => render_message("diff_notification.text.html.rhtml",
-                :project_name => project_name,
+                :project => project,
                 :author => author,
                 :diff => diff,
-                :changeset => changeset)
+                :changeset => changeset,
+                :changeset_url => url_for(:controller => 'repositories', :action => 'diff',
+                :rev => changeset.revision))
 
     attachment 'text/plain' do |a|
       a.filename = "changeset_rev_#{changeset.revision}.diff"
       a.body = diff.join
     end
+
   end
 end
