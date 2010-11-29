@@ -8,7 +8,7 @@ module DiffMailerHelper
       'line-num'    => 'border: 1px solid #d7d7d7; font-size: 0.8em; text-align: right; width: 2%; padding-right: 3px; color: #999;',
       'diff_out'    => 'background: #fcc;',
       'diff_in'     => 'background: #cfc;',
-      'line-code'   => 'margin: 0px; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-size: 1em',
+      'line-code'   => 'margin: 0px; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-size: 1.2em',
       'filecontent' => 'border: 1px solid #ccc;  border-collapse: collapse; width:98%;'
     }
 
