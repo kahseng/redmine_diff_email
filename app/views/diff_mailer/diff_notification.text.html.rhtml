@@ -4,7 +4,7 @@
 </head>
 <body style="font-family: Verdana, sans-serif; font-size: 0.8em; color:#484848;">
 <div>
-        <b>Project:</b> <%= link_to @project.name, project_url(@project) %><br />
+        <b>Project:</b> <%= link_to @project.name, @project_url %><br />
         <b>Revision:</b> <%= link_to @changeset.revision, @changeset_url %> <br />
         <b>Author:</b> <%= h(@author) %> <br />
         <b>Summary:</b> <%= @changeset.short_comments %> <br />
