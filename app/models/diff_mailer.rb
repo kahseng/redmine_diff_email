@@ -17,6 +17,8 @@ class DiffMailer < ActionMailer::Base
       u.mail
     }
 
+    from Setting.mail_from
+
     project = changeset.repository.project
     author = changeset.author.to_s
     subject "[#{project.name}] Commit by #{author}: #{changeset.short_comments}"
