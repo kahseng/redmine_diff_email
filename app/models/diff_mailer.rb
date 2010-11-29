@@ -29,8 +29,7 @@ class DiffMailer < ActionMailer::Base
                 :author => author,
                 :diff => diff,
                 :changeset => changeset,
-                :changeset_url => url_for(:controller => 'repositories', :action => 'diff',
-                :rev => changeset.revision),
+                :changeset_url => url_for(:controller => 'repositories', :action => 'diff', :rev => changeset.revision, :id => project.id),
                 :project_url => url_for(:controller => 'projects', :action => 'show', :id => project.id))
 
     attachment 'text/plain' do |a|
