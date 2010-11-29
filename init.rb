@@ -16,6 +16,6 @@ Dispatcher.to_prepare do
   field = UserCustomField.find_by_name 'Send diff email'
   unless field
     UserCustomField.create!(:name => 'Send diff email', :field_format => 'bool',
-                            :editable => true, :visible => true)
+                            :editable => true)
   end
 end
