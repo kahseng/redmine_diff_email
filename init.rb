@@ -12,10 +12,4 @@ end
 
 Dispatcher.to_prepare do
   Changeset.send(:include, ChangesetPatch)
-
-  field = UserCustomField.find_by_name 'Send diff email'
-  unless field
-    UserCustomField.create!(:name => 'Send diff email', :field_format => 'bool',
-                            :editable => true)
-  end
 end
