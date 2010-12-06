@@ -1,4 +1,5 @@
 class DiffMailer < ActionMailer::Base
+  include Redmine::I18n
 
   def self.default_url_options
     h = Setting.host_name
