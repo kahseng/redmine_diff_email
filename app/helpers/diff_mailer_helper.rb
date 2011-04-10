@@ -30,8 +30,8 @@ module DiffMailerHelper
       </thead>
       <tbody>]
       prev_line_left, prev_line_right = nil, nil
-      table_file.keys.sort.each do |key, line|
-        if prev_line_left && prev_line_right && (table_file[key].nb_line_left != prev_line_left+1) && (table_file[key].nb_line_right != prev_line_right+1)
+      table_file.each_line do |key, line|
+         if prev_line_left && prev_line_right && (line.nb_line_left != prev_line_left + 1) && (line.nb_line_right != prev_line_right+1)
           result += %Q[
             <tr>
               <th #{replace_css("line-num")}>...</th><th #{replace_css("line-num")}>...</th><td></td>
@@ -39,23 +39,23 @@ module DiffMailerHelper
         end
         result += %Q[
           <tr>
-            <th #{replace_css("line-num")}>#{table_file[key].nb_line_left}</th>
-            <th #{replace_css("line-num")}>#{table_file[key].nb_line_right}</th>]
-        if table_file[key].line_left.empty?
-          result += %Q[<td #{replace_css(table_file[key].type_diff_right)}">
-              <pre #{replace_css("line-code")}>#{to_utf8 table_file[key].line_right}</pre>
+            <th #{replace_css("line-num")}>#{line.nb_line_left}</th>
+            <th #{replace_css("line-num")}>#{line.nb_line_right}</th>]
+        if line.line_left.empty?
+          result += %Q[<td #{replace_css(line.type_diff_right)}">
+              <pre #{replace_css("line-code")}>#{to_utf8 line.line_right}</pre>
             </td>]
         else
           result += %Q[
-            <td #{replace_css(table_file[key].type_diff_left)}">
-              <pre #{replace_css("line-code")}>#{to_utf8 table_file[key].line_left}</pre>
+            <td #{replace_css(line.type_diff_left)}">
+              <pre #{replace_css("line-code")}>#{to_utf8 line.line_left}</pre>
             </td>]
         end
 
         result += '</tr>'
 
-        prev_line_left = table_file[key].nb_line_left.to_i if table_file[key].nb_line_left.to_i > 0
-        prev_line_right = table_file[key].nb_line_right.to_i if table_file[key].nb_line_right.to_i > 0
+        prev_line_left = line.nb_line_left.to_i if line.nb_line_left.to_i > 0
+        prev_line_right = line.nb_line_right.to_i if line.nb_line_right.to_i > 0
       end
       result += %Q[
       </tbody>
