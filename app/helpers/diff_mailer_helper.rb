@@ -30,7 +30,7 @@ module DiffMailerHelper
       </thead>
       <tbody>]
       prev_line_left, prev_line_right = nil, nil
-      table_file.each_line do |key, line|
+      table_file.each_line do |spacing, line|
          if prev_line_left && prev_line_right && (line.nb_line_left != prev_line_left + 1) && (line.nb_line_right != prev_line_right+1)
           result += %Q[
             <tr>
