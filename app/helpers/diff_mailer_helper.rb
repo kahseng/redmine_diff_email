@@ -43,12 +43,12 @@ module DiffMailerHelper
             <th #{replace_css("line-num")}>#{line.nb_line_right}</th>]
         if line.line_left.empty?
           result += %Q[<td #{replace_css(line.type_diff_right)}">
-              <pre #{replace_css("line-code")}>#{to_utf8 line.line_right}</pre>
+              <pre #{replace_css("line-code")}>#{Redmine::CodesetUtil.to_utf8_by_setting line.line_right}</pre>
             </td>]
         else
           result += %Q[
             <td #{replace_css(line.type_diff_left)}">
-              <pre #{replace_css("line-code")}>#{to_utf8 line.line_left}</pre>
+              <pre #{replace_css("line-code")}>#{Redmine::CodesetUtil.to_utf8_by_setting line.line_left}</pre>
             </td>]
         end
 
